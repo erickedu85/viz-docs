@@ -1,0 +1,30 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "Viz Docs"
+  navbar:
+    search: true
+    left:
+      - href: index.qmd
+        text: Home
+      - text: Environment
+        menu:
+          - href: environment/venv-vscode.qmd
+            text: Python `.venv`
+      - text: Git and Publishing
+        menu:
+          - href: git-github/quarto-install.qmd
+            text: Install Quarto
+          - href: git-github/quarto-project.qmd
+            text: Quarto Project
+          - href: git-github/git-intro.qmd
+            text: Git Basics
+          - href: git-github/github-pages.qmd
+            text: GitHub Pages
+
+format:
+  html:
+    theme: cosmo
+    toc: true

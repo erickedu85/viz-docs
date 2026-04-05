@@ -1,0 +1,506 @@
+[
+  {
+    "objectID": "environment/venv-vscode.html",
+    "href": "environment/venv-vscode.html",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "",
+    "text": "A virtual environment helps isolate project dependencies, avoid version conflicts, and improve reproducibility across projects. In this guide, the environment is named .venv, which is a common convention and works well with Visual Studio Code.\nThis guide also clarifies one of the most common sources of confusion when working with Python in VS Code:\n\na Python interpreter is used to run regular scripts such as .py\na Jupyter kernel is used to run notebook cells in .ipynb files and other notebook-based interfaces\n\n\n\n\n\n\n\nKey idea\n\n\n\nFor scripts, focus on the Python interpreter.\nFor notebooks, focus on the Jupyter kernel.\nIn both cases, the safest option is to use the Python installation inside your local .venv."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#introduction",
+    "href": "environment/venv-vscode.html#introduction",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "",
+    "text": "A virtual environment helps isolate project dependencies, avoid version conflicts, and improve reproducibility across projects. In this guide, the environment is named .venv, which is a common convention and works well with Visual Studio Code.\nThis guide also clarifies one of the most common sources of confusion when working with Python in VS Code:\n\na Python interpreter is used to run regular scripts such as .py\na Jupyter kernel is used to run notebook cells in .ipynb files and other notebook-based interfaces\n\n\n\n\n\n\n\nKey idea\n\n\n\nFor scripts, focus on the Python interpreter.\nFor notebooks, focus on the Jupyter kernel.\nIn both cases, the safest option is to use the Python installation inside your local .venv."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#prerequisites",
+    "href": "environment/venv-vscode.html#prerequisites",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nBefore starting, make sure you have installed:\n\nPython\nVisual Studio Code\nQuarto if you also plan to work with .qmd files\nJupyter support through packages installed inside your environment"
+  },
+  {
+    "objectID": "environment/venv-vscode.html#key-concepts",
+    "href": "environment/venv-vscode.html#key-concepts",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Key concepts",
+    "text": "Key concepts\n\nWhat is .venv?\nA .venv is a local Python virtual environment stored inside your project folder. It contains its own Python executable and its own installed libraries, which helps keep one project independent from another.\n\n\nPython interpreter vs. Jupyter kernel\nThese two concepts are related, but they are not the same.\n\nPython interpreter\nThe Python interpreter is the executable that runs Python code.\nTypical examples:\n\n./.venv/bin/python on macOS/Linux\n.venv\\Scripts\\python.exe on Windows\n\nWhen you run a .py file in VS Code, the editor uses a selected Python interpreter.\n\n\nJupyter kernel\nA Jupyter kernel is the execution engine used by notebook-based tools such as:\n\nJupyter Notebook\nJupyterLab\nVS Code notebooks (.ipynb)\nQuarto documents with Python code cells\n\nA Jupyter kernel is usually associated with a specific Python interpreter. In practice, you want the notebook kernel to use the Python interpreter inside your .venv.\n\n\n\n\n\n\nPractical rule\n\n\n\n\nFor .py files, select the correct Python interpreter\nFor .ipynb files, select the correct Jupyter kernel\nIdeally, both should point to the Python installation inside .venv"
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-1.-create-the-virtual-environment",
+    "href": "environment/venv-vscode.html#step-1.-create-the-virtual-environment",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 1. Create the virtual environment",
+    "text": "Step 1. Create the virtual environment\nCreate the environment from the root of your project.\n\nmacOS and Linux\ncd path/to/your/project\npython -m venv .venv\n\n\nWindows\ncd path\\to\\your\\project\npython -m venv .venv\nThis creates a local virtual environment named .venv inside the project directory."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-2.-activate-the-virtual-environment",
+    "href": "environment/venv-vscode.html#step-2.-activate-the-virtual-environment",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 2. Activate the virtual environment",
+    "text": "Step 2. Activate the virtual environment\nAfter creating the environment, activate it in the terminal.\n\nmacOS and Linux\nsource .venv/bin/activate\n\n\nWindows\n.venv\\Scripts\\activate\nIf PowerShell blocks activation, use:\nSet-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process\n.venv\\Scripts\\activate\nOnce activated, the terminal usually shows the environment name, for example:\n(.venv)\n\n\n\n\n\n\nQuick check\n\n\n\nIf you see (.venv) at the beginning of the terminal prompt, the environment is usually active."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-3.-install-packages-inside-.venv",
+    "href": "environment/venv-vscode.html#step-3.-install-packages-inside-.venv",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 3. Install packages inside .venv",
+    "text": "Step 3. Install packages inside .venv\nOnce .venv is active, install the packages you need inside that environment.\n\nFor notebooks and notebook execution\npip install ipykernel jupyter\n\n\nFor data analysis and visualization\npip install pandas altair vega_datasets\n\n\nWhy these packages?\n\nipykernel: lets Jupyter-based tools execute Python using the current environment\njupyter: provides notebook support\npandas: data manipulation\naltair: declarative visualization\nvega_datasets: sample datasets for Altair\n\n\n\n\n\n\n\nImportant\n\n\n\nRun these commands after activating .venv. Otherwise, packages may be installed in the wrong Python environment."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-4.-open-the-project-in-vs-code",
+    "href": "environment/venv-vscode.html#step-4.-open-the-project-in-vs-code",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 4. Open the project in VS Code",
+    "text": "Step 4. Open the project in VS Code\nA good practice is to open VS Code from the project root:\ncode .\nThis helps VS Code detect the project structure and the local .venv."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-5.-select-the-python-interpreter-in-vs-code",
+    "href": "environment/venv-vscode.html#step-5.-select-the-python-interpreter-in-vs-code",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 5. Select the Python interpreter in VS Code",
+    "text": "Step 5. Select the Python interpreter in VS Code\nFor regular Python scripts such as .py, select the interpreter from the local .venv.\n\nTypical interpreter path\n\nmacOS/Linux: ./.venv/bin/python\nWindows: .venv\\Scripts\\python.exe\n\n\n\nIn VS Code\n\nOpen the Command Palette\n\nmacOS: Cmd + Shift + P\nWindows/Linux: Ctrl + Shift + P\n\nRun Python: Select Interpreter\nChoose the interpreter from .venv\n\n\n\n\nSelecting the Python interpreter in VS Code\n\n\n\n\n\n\n\n\nRemember\n\n\n\nSelecting the interpreter is especially relevant for .py files. It does not automatically guarantee that a notebook will use the same environment."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-6.-use-notebooks-correctly-in-vs-code",
+    "href": "environment/venv-vscode.html#step-6.-use-notebooks-correctly-in-vs-code",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 6. Use notebooks correctly in VS Code",
+    "text": "Step 6. Use notebooks correctly in VS Code\nWhen working with notebooks (.ipynb), VS Code uses a Jupyter kernel, not just the interpreter selector.\n\nBest case: .venv is detected automatically\nSometimes VS Code detects the environment automatically and lets you use it directly as a notebook kernel.\nIf that happens:\n\nOpen the notebook\nClick Select Kernel\nChoose the option associated with .venv\n\n\n\n\nSelecting the Jupyter kernel in VS Code\n\n\n\n\nIf .venv is not available as a kernel\nRegister the environment manually as a Jupyter kernel:\npython -m ipykernel install --user --name=project-viz-env --display-name=\"Python viz (.venv)\"\n\n\nMeaning of the command\n\npython: uses the currently active interpreter, ideally the one inside .venv\n-m ipykernel install: registers a Jupyter kernel\n--user: installs it only for the current user\n--name: internal kernel name\n--display-name: visible label in VS Code or JupyterLab\n\nAfter this, the kernel should appear in notebook interfaces.\n\n\n\n\n\n\nTip\n\n\n\nManual kernel registration is useful when VS Code does not detect .venv automatically. In many cases, automatic detection works and manual registration is not necessary."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-7.-select-the-jupyter-kernel-in-vs-code",
+    "href": "environment/venv-vscode.html#step-7.-select-the-jupyter-kernel-in-vs-code",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 7. Select the Jupyter kernel in VS Code",
+    "text": "Step 7. Select the Jupyter kernel in VS Code\nFor a notebook:\n\nOpen the .ipynb file\nClick Select Kernel\nChoose the kernel associated with your .venv\n\nIf you registered it manually, it may appear with a display name such as:\nPython viz (.venv)\nThen the notebook will execute cells using the project environment."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-8.-verify-that-the-notebook-is-using-.venv",
+    "href": "environment/venv-vscode.html#step-8.-verify-that-the-notebook-is-using-.venv",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 8. Verify that the notebook is using .venv",
+    "text": "Step 8. Verify that the notebook is using .venv\nInside a notebook cell, run:\nimport sys\nprint(sys.executable)\nYou want to see a path pointing to your local .venv, such as:\n.../your-project/.venv/bin/python\nIf it points to a global Python instead, then the notebook is using the wrong kernel.\n\n\n\n\n\n\nWhy this matters\n\n\n\nA notebook may open correctly and still use the wrong environment. Checking sys.executable is a simple way to confirm that the notebook is really running from .venv."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#step-9.-deactivate-the-environment",
+    "href": "environment/venv-vscode.html#step-9.-deactivate-the-environment",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Step 9. Deactivate the environment",
+    "text": "Step 9. Deactivate the environment\nWhen you finish working in the terminal, deactivate the environment with:\ndeactivate\nThis exits the virtual environment and returns to the default shell Python."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#common-mistakes",
+    "href": "environment/venv-vscode.html#common-mistakes",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\nMistake 1. Confusing interpreter and kernel\nA Python interpreter and a Jupyter kernel are related, but not identical.\n\nScripts use an interpreter\nNotebooks use a kernel\nThe kernel should ideally use the interpreter from .venv\n\n\n\nMistake 2. Installing packages outside .venv\nAlways activate .venv before running pip install ....\n\n\nMistake 3. Assuming VS Code always detects .venv\nOften it does, but not always. Manual kernel registration is optional, not mandatory.\n\n\nMistake 4. Clicking Install for the wrong Python\nIf VS Code says something like “Running cells with Python X requires ipykernel”, first check whether that Python is really your .venv."
+  },
+  {
+    "objectID": "environment/venv-vscode.html#recommended-workflow",
+    "href": "environment/venv-vscode.html#recommended-workflow",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Recommended workflow",
+    "text": "Recommended workflow\n\nCreate .venv\nActivate .venv\nInstall required packages\nOpen the project in VS Code\nSelect the interpreter for .py files\nSelect the Jupyter kernel for .ipynb files\nRegister the kernel only if automatic detection fails"
+  },
+  {
+    "objectID": "environment/venv-vscode.html#final-note",
+    "href": "environment/venv-vscode.html#final-note",
+    "title": "Creating and Using a Python .venv in VS Code",
+    "section": "Final note",
+    "text": "Final note\n\n\n\n\n\n\nGood practice\n\n\n\nUse .venv as the default environment for each project. This keeps dependencies isolated and makes both scripts and notebooks more reproducible."
+  },
+  {
+    "objectID": "git-github/git-intro.html",
+    "href": "git-github/git-intro.html",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "",
+    "text": "Git is a distributed version control system used to track changes in source code and collaborate efficiently. It is especially useful in programming, research, and data science projects because it preserves the history of changes, supports rollback, and improves reproducibility.\nIn a typical project workflow, Git helps you:\n\ntrack the history of changes\ncollaborate more safely\nrecover previous versions if needed\nkeep experiments and project evolution organized\n\n\n\n\n\n\n\nWhy Git matters\n\n\n\nGit is not only for software engineering. It is also highly valuable in research, data science, academic projects, and technical documentation because it improves traceability and reproducibility."
+  },
+  {
+    "objectID": "git-github/git-intro.html#introduction",
+    "href": "git-github/git-intro.html#introduction",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "",
+    "text": "Git is a distributed version control system used to track changes in source code and collaborate efficiently. It is especially useful in programming, research, and data science projects because it preserves the history of changes, supports rollback, and improves reproducibility.\nIn a typical project workflow, Git helps you:\n\ntrack the history of changes\ncollaborate more safely\nrecover previous versions if needed\nkeep experiments and project evolution organized\n\n\n\n\n\n\n\nWhy Git matters\n\n\n\nGit is not only for software engineering. It is also highly valuable in research, data science, academic projects, and technical documentation because it improves traceability and reproducibility."
+  },
+  {
+    "objectID": "git-github/git-intro.html#prerequisites",
+    "href": "git-github/git-intro.html#prerequisites",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nBefore starting, make sure you have:\n\nGit installed on your computer\nVisual Studio Code or another code editor\na project folder already created\na GitHub account if you want to publish the repository online"
+  },
+  {
+    "objectID": "git-github/git-intro.html#step-1.-create-a-.gitignore-file",
+    "href": "git-github/git-intro.html#step-1.-create-a-.gitignore-file",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Step 1. Create a .gitignore file",
+    "text": "Step 1. Create a .gitignore file\nA .gitignore file tells Git which files and folders should not be tracked.\nThis is important for keeping the repository clean and avoiding unnecessary or machine-specific files.\nCreate the file from the root of your project:\ntouch .gitignore\nThen add rules such as the following:\n# Python\n.venv/\n__pycache__/\n*.pyc\n\n# Environment variables\n.env\n\n# macOS\n.DS_Store\n\n# Jupyter\n.ipynb_checkpoints/\n\n# Quarto\n_site/\n.quarto/\n/.quarto/\n*_files/\n\nWhy is .gitignore important?\n\nprevents committing unnecessary or large files\navoids uploading virtual environments such as .venv\nkeeps the repository cleaner and lighter\nimproves portability across machines\n\n\n\n\n\n\n\nBest practice\n\n\n\nCreate .gitignore before running git init, so the repository starts clean from the beginning."
+  },
+  {
+    "objectID": "git-github/git-intro.html#step-2.-initialize-git-locally",
+    "href": "git-github/git-intro.html#step-2.-initialize-git-locally",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Step 2. Initialize Git locally",
+    "text": "Step 2. Initialize Git locally\nOnce the project folder is ready and .gitignore has been created, initialize Git in the project directory.\ngit init\nThis turns your folder into a local Git repository.\n\nAdd files to staging\ngit add .\nThis stages all project files except those excluded by .gitignore.\n\n\nCreate the first commit\ngit commit -m \"Initial clean commit\"\nThis saves the first snapshot of your project history.\n\n\nCheck repository status\nBefore committing, it is a good habit to verify what Git is about to include:\ngit status\n\n\n\n\n\n\nRecommended workflow\n\n\n\nA simple initial workflow is:\n\ncreate .gitignore\nrun git init\nverify files with git status\nstage files with git add .\ncreate a commit with git commit"
+  },
+  {
+    "objectID": "git-github/git-intro.html#step-3.-create-the-repository-on-github",
+    "href": "git-github/git-intro.html#step-3.-create-the-repository-on-github",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Step 3. Create the repository on GitHub",
+    "text": "Step 3. Create the repository on GitHub\nTo publish your project online, create a new repository on GitHub.\nRecommended configuration:\n\nRepository name: choose a meaningful name, for example project-visualization\nVisibility: Public or Private\nDo not initialize with README: this helps avoid unnecessary merge conflicts when linking an existing local project\n\nAfter that, click Create repository.\n\n\n\nCreating a repository on GitHub"
+  },
+  {
+    "objectID": "git-github/git-intro.html#step-4.-link-the-local-repository-to-github",
+    "href": "git-github/git-intro.html#step-4.-link-the-local-repository-to-github",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Step 4. Link the local repository to GitHub",
+    "text": "Step 4. Link the local repository to GitHub\nAfter creating the remote repository on GitHub, connect your local project to it.\ngit remote add origin https://github.com/USUARIO/proyecto-visualizacion.git\ngit branch -M main\ngit push -u origin main\n\nMeaning of each command\n\ngit remote add origin ...: links the local repository to the remote repository on GitHub\ngit branch -M main: renames the default branch to main\ngit push -u origin main: uploads the project and sets the remote tracking branch\n\n\n\n\n\n\n\nReplace placeholder values\n\n\n\nBefore running the command, replace USUARIO and proyecto-visualizacion with your real GitHub username and repository name."
+  },
+  {
+    "objectID": "git-github/git-intro.html#common-mistakes",
+    "href": "git-github/git-intro.html#common-mistakes",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\nMistake 1. Creating .gitignore too late\nIf you run git init and stage files before creating .gitignore, unnecessary files may already be tracked.\n\n\nMistake 2. Uploading .venv\nA virtual environment should usually stay local. Do not include .venv/ in your repository.\n\n\nMistake 3. Forgetting to check git status\nCommitting without reviewing the status can lead to accidental uploads of unwanted files.\n\n\nMistake 4. Initializing the GitHub repository with a README\nIf your local project already exists, initializing the remote repository with a README can introduce avoidable merge conflicts."
+  },
+  {
+    "objectID": "git-github/git-intro.html#recommended-flow",
+    "href": "git-github/git-intro.html#recommended-flow",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Recommended flow",
+    "text": "Recommended flow\nUse this sequence for a clean first setup:\n\n\n\n\n\nflowchart TD\n    A[Create project folder] --&gt; B[Create .gitignore]\n    B --&gt; C[Run git init]\n    C --&gt; D[Check git status]\n    D --&gt; E[Run git add .]\n    E --&gt; F[Create first commit]\n    F --&gt; G[Create repository on GitHub]\n    G --&gt; H[Link remote origin]\n    H --&gt; I[Push to main]"
+  },
+  {
+    "objectID": "git-github/git-intro.html#final-note",
+    "href": "git-github/git-intro.html#final-note",
+    "title": "Getting Started with Git for Project Version Control",
+    "section": "Final note",
+    "text": "Final note\nGit becomes much more useful when used consistently from the start of a project. Even in small academic or personal projects, it helps maintain order, traceability, and reproducibility.\n\n\n\n\n\n\nFinal recommendation\n\n\n\nFor projects in Python, Jupyter, or Quarto, always review your .gitignore carefully before the first commit. This small step prevents many common repository problems later."
+  },
+  {
+    "objectID": "git-github/quarto-project.html",
+    "href": "git-github/quarto-project.html",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "",
+    "text": "A Quarto project helps you organize multiple documents, share configuration across files, and control where rendered outputs are written. One of the most practical setups is to define a project with _quarto.yml and send rendered output to a docs/ folder.\nThis structure is especially useful when you want to keep source files clean while also preparing the project for publication with GitHub Pages.\n\n\n\n\n\n\nWhy use a Quarto project?\n\n\n\nA Quarto project lets you:\n\nmanage multiple .qmd files in one directory\nshare configuration through _quarto.yml\nrender the whole project with one command\nredirect generated output to a separate folder such as docs/"
+  },
+  {
+    "objectID": "git-github/quarto-project.html#introduction",
+    "href": "git-github/quarto-project.html#introduction",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "",
+    "text": "A Quarto project helps you organize multiple documents, share configuration across files, and control where rendered outputs are written. One of the most practical setups is to define a project with _quarto.yml and send rendered output to a docs/ folder.\nThis structure is especially useful when you want to keep source files clean while also preparing the project for publication with GitHub Pages.\n\n\n\n\n\n\nWhy use a Quarto project?\n\n\n\nA Quarto project lets you:\n\nmanage multiple .qmd files in one directory\nshare configuration through _quarto.yml\nrender the whole project with one command\nredirect generated output to a separate folder such as docs/"
+  },
+  {
+    "objectID": "git-github/quarto-project.html#prerequisites",
+    "href": "git-github/quarto-project.html#prerequisites",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nBefore starting, make sure you have installed:\n\nQuarto\nVisual Studio Code if you want to edit and preview from an IDE\nGit if you plan to publish the project on GitHub\na GitHub account if you want to deploy with GitHub Pages"
+  },
+  {
+    "objectID": "git-github/quarto-project.html#what-is-_quarto.yml",
+    "href": "git-github/quarto-project.html#what-is-_quarto.yml",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "What is _quarto.yml?",
+    "text": "What is _quarto.yml?\nThe file _quarto.yml is the main project configuration file in Quarto. It is used to define project-level settings such as:\n\nthe project type\nthe output directory\nwebsite configuration\nshared format options\npreview behavior\n\nIn practice, _quarto.yml is the file that turns a normal folder into a Quarto project.\n\n\n\n\n\n\nKey idea\n\n\n\nIf you want a folder to behave as a Quarto project, _quarto.yml is the central file that controls that behavior."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#why-send-output-to-docs",
+    "href": "git-github/quarto-project.html#why-send-output-to-docs",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Why send output to docs/?",
+    "text": "Why send output to docs/?\nBy default, Quarto website output is often written to _site/, but using docs/ can be more convenient when you want a repository layout that is easy to inspect and publish.\nSending output to docs/ helps you:\n\nkeep generated files separate from source files\navoid clutter in the project root\nmake GitHub Pages configuration simpler\nkeep the repository structure easier to understand\n\n\n\n\n\n\n\nCommon use case\n\n\n\nIf your repository will be published with GitHub Pages, docs/ is one of the simplest output directories to use."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#recommended-project-structure",
+    "href": "git-github/quarto-project.html#recommended-project-structure",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Recommended project structure",
+    "text": "Recommended project structure\nA clean project structure could look like this:\nmy-quarto-project/\n├── _quarto.yml\n├── index.qmd\n├── about.qmd\n├── styles.css\n├── images/\n│   └── ...\n└── docs/\n\nWhat each file or folder does\n\n_quarto.yml: project configuration\nindex.qmd: home page or main entry point\nabout.qmd: additional content page\nstyles.css: optional custom styles\nimages/: figures and screenshots\ndocs/: rendered HTML output"
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-1.-create-the-project-folder",
+    "href": "git-github/quarto-project.html#step-1.-create-the-project-folder",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 1. Create the project folder",
+    "text": "Step 1. Create the project folder\nCreate a new folder for the project and move into it:\nmkdir my-quarto-project\ncd my-quarto-project\nYou can use any project name you want. The important part is to keep all Quarto source files inside this folder."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-2.-create-the-main-files",
+    "href": "git-github/quarto-project.html#step-2.-create-the-main-files",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 2. Create the main files",
+    "text": "Step 2. Create the main files\nCreate the minimum files needed for the project:\ntouch _quarto.yml\ntouch index.qmd\nmkdir docs\nIf you want an extra page:\ntouch about.qmd\n\n\n\n\n\n\nNote\n\n\n\nYou do not always need to create docs/ manually. Quarto can create the output directory during render, but creating it explicitly helps make the project structure clear from the beginning."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-3.-create-_quarto.yml",
+    "href": "git-github/quarto-project.html#step-3.-create-_quarto.yml",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 3. Create _quarto.yml",
+    "text": "Step 3. Create _quarto.yml\nHere is a minimal and clean configuration for a website project that renders output to docs/:\nproject:\n  type: website\n  output-dir: docs\n\nwebsite:\n  title: \"My Quarto Project\"\n  navbar:\n    left:\n      - href: index.qmd\n        text: Home\n      - href: about.qmd\n        text: About\n\nformat:\n  html:\n    theme: cosmo\n    toc: true\n\nExplanation\n\nproject\nThis section defines the project itself.\n\ntype: website tells Quarto that this is a website project\noutput-dir: docs tells Quarto to place rendered output in docs/\n\n\n\nwebsite\nThis section defines website-specific settings.\n\ntitle sets the website title\nnavbar creates top navigation links\n\n\n\nformat\nThis section defines shared output settings.\n\nhtml means the project will render to HTML\ntheme: cosmo applies a built-in visual theme\ntoc: true enables a table of contents"
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-4.-create-index.qmd",
+    "href": "git-github/quarto-project.html#step-4.-create-index.qmd",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 4. Create index.qmd",
+    "text": "Step 4. Create index.qmd\nA minimal index.qmd file could look like this:\n---\ntitle: \"Home\"\n---\n\n# Welcome\n\nThis is the home page of my Quarto project.\n\n## Next steps\n\n- Add more pages\n- Customize the theme\n- Publish the project\nIf you created an about.qmd page, you can use:\n---\ntitle: \"About\"\n---\n\n# About this project\n\nThis page contains additional information about the site."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-5.-preview-the-project",
+    "href": "git-github/quarto-project.html#step-5.-preview-the-project",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 5. Preview the project",
+    "text": "Step 5. Preview the project\nFrom the project root, run:\nquarto preview\nQuarto will detect _quarto.yml, treat the folder as a project, render the site, and start a local preview server.\n\nWhat happens during preview?\n\nQuarto renders project files to docs/\na local server is started\nthe project can be viewed in a browser\nchanges are re-rendered while preview is active\n\n\n\n\n\n\n\nGood to know\n\n\n\nIf your project uses output-dir: docs, the rendered files remain in docs/ after preview or render. They are not temporary files that disappear when preview stops."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-6.-render-the-full-project",
+    "href": "git-github/quarto-project.html#step-6.-render-the-full-project",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 6. Render the full project",
+    "text": "Step 6. Render the full project\nTo render the full project without launching preview, run:\nquarto render\nThis is useful when you want to generate the final site output in docs/ without opening the local preview server."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-7.-understand-what-goes-into-docs",
+    "href": "git-github/quarto-project.html#step-7.-understand-what-goes-into-docs",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 7. Understand what goes into docs/",
+    "text": "Step 7. Understand what goes into docs/\nAfter rendering, the docs/ directory will contain generated output such as:\n\nindex.html\nabout.html\nsupporting assets\nother files needed by the website\n\nA possible rendered structure could look like this:\ndocs/\n├── index.html\n├── about.html\n├── site_libs/\n└── search.json\nThe exact contents may vary depending on the project configuration and features enabled."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-8.-keep-source-and-output-separate",
+    "href": "git-github/quarto-project.html#step-8.-keep-source-and-output-separate",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 8. Keep source and output separate",
+    "text": "Step 8. Keep source and output separate\nOne of the main benefits of output-dir: docs is that source files remain in the project root while rendered output is grouped in one place.\n\nSource files stay here\n\n_quarto.yml\nindex.qmd\nabout.qmd\nstyles.css\nimages/\n\n\n\nGenerated output goes here\n\ndocs/index.html\ndocs/about.html\nother generated assets\n\nThis makes it easier to distinguish between files you edit and files Quarto generates."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#step-9.-publish-with-github-pages",
+    "href": "git-github/quarto-project.html#step-9.-publish-with-github-pages",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Step 9. Publish with GitHub Pages",
+    "text": "Step 9. Publish with GitHub Pages\nIf your repository is hosted on GitHub, this structure works well with GitHub Pages.\n\nTypical workflow\n\nPush the repository to GitHub\nOpen the repository settings\nGo to Pages\nUnder Source, choose the branch\nSelect the docs/ folder\nSave the configuration\n\nAfter that, GitHub Pages can publish the site from the rendered content in docs/.\n\n\n\n\n\n\nPractical recommendation\n\n\n\nA common workflow is:\n\nedit .qmd source files\nrun quarto render\ncommit both source files and the rendered docs/ output\npush to GitHub"
+  },
+  {
+    "objectID": "git-github/quarto-project.html#optional-improvements",
+    "href": "git-github/quarto-project.html#optional-improvements",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Optional improvements",
+    "text": "Optional improvements\n\nAdd a custom stylesheet\nYou can add a file such as styles.css and reference it in _quarto.yml:\nformat:\n  html:\n    theme: cosmo\n    toc: true\n    css: styles.css\n\n\nAdd preview options\nYou can also control preview behavior in _quarto.yml:\nproject:\n  type: website\n  output-dir: docs\n  preview:\n    browser: true\nThis is useful if you want project-specific preview settings.\n\n\nAdd a site URL\nIf the project will be published, you can define the website URL:\nwebsite:\n  title: \"My Quarto Project\"\n  site-url: \"https://your-username.github.io/your-repository/\""
+  },
+  {
+    "objectID": "git-github/quarto-project.html#common-mistakes",
+    "href": "git-github/quarto-project.html#common-mistakes",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\nMistake 1. Forgetting _quarto.yml\nWithout _quarto.yml, Quarto may treat files as individual documents instead of as a project.\n\n\nMistake 2. Mixing source files with rendered output\nIf output is written to the project root, the directory can become harder to manage. Using docs/ keeps things more organized.\n\n\nMistake 3. Editing files inside docs/\nThe docs/ folder contains generated output. In most cases, you should edit the source .qmd files instead, then render again.\n\n\nMistake 4. Forgetting to render before publishing\nIf GitHub Pages is configured to publish from docs/, make sure the project has been rendered so that the latest HTML files are actually there.\n\n\nMistake 5. Using broken navigation links\nIf a page is listed in the navbar, make sure the corresponding .qmd file exists."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#recommended-workflow",
+    "href": "git-github/quarto-project.html#recommended-workflow",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Recommended workflow",
+    "text": "Recommended workflow\nA clean workflow for this kind of project is:\n\ncreate the project folder\ncreate _quarto.yml\ndefine output-dir: docs\ncreate index.qmd and other pages\npreview locally with quarto preview\nrender the full site with quarto render\npublish docs/ through GitHub Pages if needed"
+  },
+  {
+    "objectID": "git-github/quarto-project.html#complete-minimal-example",
+    "href": "git-github/quarto-project.html#complete-minimal-example",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Complete minimal example",
+    "text": "Complete minimal example\n\n_quarto.yml\nproject:\n  type: website\n  output-dir: docs\n\nwebsite:\n  title: \"My Quarto Project\"\n  navbar:\n    left:\n      - href: index.qmd\n        text: Home\n      - href: about.qmd\n        text: About\n\nformat:\n  html:\n    theme: cosmo\n    toc: true\n\n\nindex.qmd\n---\ntitle: \"Home\"\n---\n\n# Welcome\n\nThis is the home page of my Quarto project.\n\n\nabout.qmd\n---\ntitle: \"About\"\n---\n\n# About\n\nThis page contains extra information."
+  },
+  {
+    "objectID": "git-github/quarto-project.html#final-note",
+    "href": "git-github/quarto-project.html#final-note",
+    "title": "Creating a Quarto Project with _quarto.yml and Output to docs/",
+    "section": "Final note",
+    "text": "Final note\nUsing _quarto.yml together with output-dir: docs is a simple and effective way to keep a Quarto project organized. It separates source files from generated output, supports clean project structure, and works especially well when the final site will be published with GitHub Pages.\n\n\n\n\n\n\nFinal recommendation\n\n\n\nIf your goal is to keep the project clean and make publishing easier, docs/ is usually a very practical output directory for Quarto website projects."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Home",
+    "section": "",
+    "text": "abc\n\n\n\na\nb\nc"
+  },
+  {
+    "objectID": "index.html#next-steps",
+    "href": "index.html#next-steps",
+    "title": "Home",
+    "section": "",
+    "text": "a\nb\nc"
+  },
+  {
+    "objectID": "git-github/github-pages.html",
+    "href": "git-github/github-pages.html",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "",
+    "text": "GitHub Pages is a free static hosting service provided by GitHub. It allows you to publish websites directly from a repository, which makes it especially useful for Quarto reports, project websites, and student portfolios.\nIn a typical workflow, you first prepare and push your project to GitHub, and then configure GitHub Pages from the repository settings so the site becomes publicly accessible.\n\n\n\n\n\n\nTypical use cases\n\n\n\nAccording to the source material, common uses of GitHub Pages include:\n\nQuarto reports and websites\nStudent portfolios"
+  },
+  {
+    "objectID": "git-github/github-pages.html#introduction",
+    "href": "git-github/github-pages.html#introduction",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "",
+    "text": "GitHub Pages is a free static hosting service provided by GitHub. It allows you to publish websites directly from a repository, which makes it especially useful for Quarto reports, project websites, and student portfolios.\nIn a typical workflow, you first prepare and push your project to GitHub, and then configure GitHub Pages from the repository settings so the site becomes publicly accessible.\n\n\n\n\n\n\nTypical use cases\n\n\n\nAccording to the source material, common uses of GitHub Pages include:\n\nQuarto reports and websites\nStudent portfolios"
+  },
+  {
+    "objectID": "git-github/github-pages.html#prerequisites",
+    "href": "git-github/github-pages.html#prerequisites",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nBefore enabling GitHub Pages, make sure you have:\n\na GitHub repository already created\nyour project pushed to GitHub\na Quarto project or other static content ready to publish\na clear output folder strategy, such as publishing from docs/\n\n\n\n\n\n\n\nGood practice\n\n\n\nIf your project is built with Quarto, it is common to configure the rendered site so the final output is written to a publishable folder such as docs/."
+  },
+  {
+    "objectID": "git-github/github-pages.html#step-1.-open-your-repository-on-github",
+    "href": "git-github/github-pages.html#step-1.-open-your-repository-on-github",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Step 1. Open your repository on GitHub",
+    "text": "Step 1. Open your repository on GitHub\nGo to the GitHub repository that contains the project you want to publish. The GitHub Pages configuration starts from the repository interface."
+  },
+  {
+    "objectID": "git-github/github-pages.html#step-2.-open-the-repository-settings",
+    "href": "git-github/github-pages.html#step-2.-open-the-repository-settings",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Step 2. Open the repository settings",
+    "text": "Step 2. Open the repository settings\nInside the repository:\n\nClick Settings\nIn the left sidebar, scroll down\nClick Pages\n\nThese are the configuration steps indicated in the source material.\n\n\n\nGitHub repository settings and Pages section"
+  },
+  {
+    "objectID": "git-github/github-pages.html#step-3.-choose-the-publishing-source",
+    "href": "git-github/github-pages.html#step-3.-choose-the-publishing-source",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Step 3. Choose the publishing source",
+    "text": "Step 3. Choose the publishing source\nUnder Source, configure the repository publishing options.\nThe source material indicates the following setup:\n\nBranch: main\nor master if that is your default branch\nFolder: / (docs)\n\nThen click Save.\n\n\n\n\n\n\nImportant\n\n\n\nMake sure the selected branch matches the branch you are actually using in the repository. In many projects this is main, but some repositories may still use master."
+  },
+  {
+    "objectID": "git-github/github-pages.html#step-4.-wait-for-github-to-publish-the-site",
+    "href": "git-github/github-pages.html#step-4.-wait-for-github-to-publish-the-site",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Step 4. Wait for GitHub to publish the site",
+    "text": "Step 4. Wait for GitHub to publish the site\nAfter saving the Pages configuration, GitHub will generate a public link after a short delay. The source indicates that this usually takes a few minutes.\nA typical published URL looks like this:\nhttps://&lt;your-username&gt;.github.io/&lt;repository-name&gt;/"
+  },
+  {
+    "objectID": "git-github/github-pages.html#how-this-fits-with-quarto",
+    "href": "git-github/github-pages.html#how-this-fits-with-quarto",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "How this fits with Quarto",
+    "text": "How this fits with Quarto\nA common workflow for Quarto projects is:\n\nWrite and render your .qmd files\nMake sure the generated site is placed in the folder you plan to publish\nPush the repository to GitHub\nEnable GitHub Pages from the repository settings\nShare the generated public URL\n\n\n\n\n\n\n\nSuggested project logic\n\n\n\nIf you are building a small course website or technical documentation site, keeping the rendered output in docs/ can simplify publishing with GitHub Pages."
+  },
+  {
+    "objectID": "git-github/github-pages.html#common-mistakes",
+    "href": "git-github/github-pages.html#common-mistakes",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Common mistakes",
+    "text": "Common mistakes\n\nMistake 1. Selecting the wrong branch\nIf GitHub Pages is configured to publish from main but your content is on another branch, the site will not publish correctly.\n\n\nMistake 2. Selecting the wrong folder\nIf Pages is configured to use / (docs), but the rendered site is not inside docs/, GitHub will not find the expected files.\n\n\nMistake 3. Expecting the site to appear instantly\nGitHub Pages may take a few minutes to generate and expose the public link. fileciteturn1file0L17-L20\n\n\nMistake 4. Forgetting to push changes\nLocal changes do not affect GitHub Pages until they are committed and pushed to the repository."
+  },
+  {
+    "objectID": "git-github/github-pages.html#recommended-workflow",
+    "href": "git-github/github-pages.html#recommended-workflow",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Recommended workflow",
+    "text": "Recommended workflow\nTo keep the process simple and reproducible:\n\nKeep your project under Git version control\nPush the latest version to GitHub\nConfigure GitHub Pages from Settings &gt; Pages\nPublish from the correct branch and folder\nTest the public URL after deployment"
+  },
+  {
+    "objectID": "git-github/github-pages.html#final-note",
+    "href": "git-github/github-pages.html#final-note",
+    "title": "Publishing a Quarto Project with GitHub Pages",
+    "section": "Final note",
+    "text": "Final note\nGitHub Pages is a simple and effective way to publish static academic and technical content for free. For Quarto users, it is especially useful for sharing reports, course materials, and small websites directly from a GitHub repository."
+  },
+  {
+    "objectID": "git-github/quarto-install.html",
+    "href": "git-github/quarto-install.html",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "",
+    "text": "Quarto is an open-source publishing system for technical and scientific communication. It allows you to combine narrative text, executable code, and outputs such as figures, tables, and interactive content in a single reproducible document.\nA Quarto document typically uses the .qmd extension and can be rendered to multiple formats, including HTML, PDF, slides, dashboards, and books.\n\n\n\n\n\n\nWhy Quarto is useful\n\n\n\nQuarto is especially useful when you want to keep text, code, and results together in one place and generate polished outputs from the same source file."
+  },
+  {
+    "objectID": "git-github/quarto-install.html#introduction",
+    "href": "git-github/quarto-install.html#introduction",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "",
+    "text": "Quarto is an open-source publishing system for technical and scientific communication. It allows you to combine narrative text, executable code, and outputs such as figures, tables, and interactive content in a single reproducible document.\nA Quarto document typically uses the .qmd extension and can be rendered to multiple formats, including HTML, PDF, slides, dashboards, and books.\n\n\n\n\n\n\nWhy Quarto is useful\n\n\n\nQuarto is especially useful when you want to keep text, code, and results together in one place and generate polished outputs from the same source file."
+  },
+  {
+    "objectID": "git-github/quarto-install.html#what-quarto-is-used-for",
+    "href": "git-github/quarto-install.html#what-quarto-is-used-for",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "What Quarto is used for",
+    "text": "What Quarto is used for\nQuarto can be used to create:\n\nHTML pages and websites\nPDF reports\nslide presentations\ndashboards\nbooks\ntechnical documentation\nreproducible analysis reports\n\nIt supports narrative writing in Markdown together with code in languages such as Python, R, and Julia."
+  },
+  {
+    "objectID": "git-github/quarto-install.html#prerequisites",
+    "href": "git-github/quarto-install.html#prerequisites",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Prerequisites",
+    "text": "Prerequisites\nBefore starting, make sure you have:\n\nVisual Studio Code installed\npermission to install software on your computer\naccess to a terminal\n\nIf you plan to execute Python code inside Quarto documents, you should also have Python installed."
+  },
+  {
+    "objectID": "git-github/quarto-install.html#step-1.-install-quarto",
+    "href": "git-github/quarto-install.html#step-1.-install-quarto",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Step 1. Install Quarto",
+    "text": "Step 1. Install Quarto\nTo install Quarto:\n\nGo to the official Quarto website.\nOpen the installation or getting started section.\nSelect your operating system.\nDownload the installer.\nRun the installer and complete the setup process.\n\nAfter installation, verify it from the terminal with:\nquarto check\nquarto --version\nIf Quarto was installed correctly, these commands should display the installed version and system configuration.\n\n\n\n\n\n\nTip\n\n\n\nUse both commands after installation:\n\nquarto --version confirms that Quarto is available\nquarto check helps detect configuration problems"
+  },
+  {
+    "objectID": "git-github/quarto-install.html#step-2.-install-the-quarto-extension-in-vs-code",
+    "href": "git-github/quarto-install.html#step-2.-install-the-quarto-extension-in-vs-code",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Step 2. Install the Quarto extension in VS Code",
+    "text": "Step 2. Install the Quarto extension in VS Code\nOnce Quarto is installed, enable support in VS Code by installing the Quarto extension.\n\nIn VS Code\n\nOpen VS Code\nOpen the Extensions panel\nSearch for Quarto\nInstall the extension published by the Quarto Dev Team\nRestart VS Code if needed\n\nThis extension provides features such as:\n\nsyntax highlighting for .qmd files\npreview and render integration\neditor support for Quarto projects\n\n\n\n\nInstall the Quarto extension from the VS Code Extensions panel"
+  },
+  {
+    "objectID": "git-github/quarto-install.html#step-3.-verify-that-quarto-works-in-vs-code",
+    "href": "git-github/quarto-install.html#step-3.-verify-that-quarto-works-in-vs-code",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Step 3. Verify that Quarto works in VS Code",
+    "text": "Step 3. Verify that Quarto works in VS Code\nAfter installing the extension:\n\nOpen a Quarto document with extension .qmd\nCheck whether a Render or Preview button appears in the editor\nTry previewing or rendering the document directly from VS Code\n\nIf those features are available, then Quarto is correctly integrated with VS Code.\n\n\n\n\n\n\nImportant\n\n\n\nIf Quarto works in the terminal but not in VS Code, the problem is often related to the editor integration, the extension state, or the current file type."
+  },
+  {
+    "objectID": "git-github/quarto-install.html#step-4.-create-a-minimal-test-document",
+    "href": "git-github/quarto-install.html#step-4.-create-a-minimal-test-document",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Step 4. Create a minimal test document",
+    "text": "Step 4. Create a minimal test document\nA simple test file can be:\n---\ntitle: \"My first Quarto document\"\nformat: html\n---\n\n# Hello Quarto\n\nThis is my first Quarto page.\nSave the file as:\ntest.qmd\nThen render it using one of these options:\n\nthe Render button in VS Code\nthe Preview button in VS Code, if available\nthe terminal with:\n\nquarto render test.qmd"
+  },
+  {
+    "objectID": "git-github/quarto-install.html#step-5.-understand-render-vs.-preview",
+    "href": "git-github/quarto-install.html#step-5.-understand-render-vs.-preview",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Step 5. Understand render vs. preview",
+    "text": "Step 5. Understand render vs. preview\nThese two actions are related, but they are not the same.\n\nRender\nquarto render generates the output file, for example an HTML page.\n\n\nPreview\nquarto preview starts a local preview server and lets you inspect changes while you edit the document.\nExample:\nquarto preview test.qmd\n\n\n\n\n\n\nKey idea\n\n\n\nUse render when you want the final output.\nUse preview when you want to edit and inspect changes interactively."
+  },
+  {
+    "objectID": "git-github/quarto-install.html#recommended-verification-checklist",
+    "href": "git-github/quarto-install.html#recommended-verification-checklist",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Recommended verification checklist",
+    "text": "Recommended verification checklist\nBefore starting to work seriously with Quarto, confirm all of the following:\n\nquarto --version works in the terminal\nquarto check runs without critical errors\nthe Quarto extension is installed in VS Code\n.qmd files open correctly in the editor\nthe Render or Preview button appears\na simple .qmd file renders successfully"
+  },
+  {
+    "objectID": "git-github/quarto-install.html#common-issues",
+    "href": "git-github/quarto-install.html#common-issues",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Common issues",
+    "text": "Common issues\n\nQuarto command not found\nIf the terminal says quarto: command not found, Quarto is probably not installed correctly or is not available in your system PATH.\n\n\nVS Code does not show Render or Preview\nPossible causes include:\n\nthe Quarto extension is not installed\nVS Code needs to be restarted\nthe file is not saved with extension .qmd\nthe current workspace has not refreshed correctly\n\n\n\nQuarto is installed but preview does not work\nCheck the following:\n\nthe file has valid YAML at the top\nthe Quarto extension is enabled\nthe document does not contain syntax errors\nQuarto works correctly from the terminal\n\n\n\n\n\n\n\nCommon mistake\n\n\n\nDo not assume that Quarto is broken just because preview fails inside VS Code. Always verify first whether quarto render or quarto preview works from the terminal."
+  },
+  {
+    "objectID": "git-github/quarto-install.html#recommended-workflow",
+    "href": "git-github/quarto-install.html#recommended-workflow",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Recommended workflow",
+    "text": "Recommended workflow\n\nInstall Quarto\nVerify the installation in the terminal\nInstall the Quarto extension in VS Code\nOpen a .qmd file\nCheck for Render or Preview in the editor\nCreate and test a minimal Quarto document\nUse quarto render or quarto preview as needed"
+  },
+  {
+    "objectID": "git-github/quarto-install.html#final-note",
+    "href": "git-github/quarto-install.html#final-note",
+    "title": "Installing and Verifying Quarto in VS Code",
+    "section": "Final note",
+    "text": "Final note\nQuarto becomes especially useful when combined with reproducible workflows in VS Code, because it allows you to keep code, text, and outputs together in a single document.\nAs your projects grow, you can extend the same workflow to websites, reports, presentations, and course materials built from .qmd files."
+  }
+]

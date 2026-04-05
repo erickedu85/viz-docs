@@ -1,0 +1,1014 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.32">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Creating and Using a Python .venv in VS Code – Viz Docs</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-37eea08aefeeee20ff55810ff984fec1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-c1fac2584b48ed01fb6e278e36375074.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<style>html{ scroll-behavior: smooth; }</style>
+
+
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Viz Docs</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-environment" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Environment</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-environment">    
+        <li>
+    <a class="dropdown-item" href="../environment/venv-vscode.html">
+ <span class="dropdown-text">Python <code>.venv</code></span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-git-and-publishing" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Git and Publishing</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-git-and-publishing">    
+        <li>
+    <a class="dropdown-item" href="../git-github/quarto-install.html">
+ <span class="dropdown-text">Install Quarto</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../git-github/quarto-project.html">
+ <span class="dropdown-text">Quarto Project</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../git-github/git-intro.html">
+ <span class="dropdown-text">Git Basics</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="../git-github/github-pages.html">
+ <span class="dropdown-text">GitHub Pages</span></a>
+  </li>  
+    </ul>
+  </li>
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#introduction" id="toc-introduction" class="nav-link active" data-scroll-target="#introduction">Introduction</a></li>
+  <li><a href="#prerequisites" id="toc-prerequisites" class="nav-link" data-scroll-target="#prerequisites">Prerequisites</a></li>
+  <li><a href="#key-concepts" id="toc-key-concepts" class="nav-link" data-scroll-target="#key-concepts">Key concepts</a>
+  <ul class="collapse">
+  <li><a href="#what-is-.venv" id="toc-what-is-.venv" class="nav-link" data-scroll-target="#what-is-.venv">What is <code>.venv</code>?</a></li>
+  <li><a href="#python-interpreter-vs.-jupyter-kernel" id="toc-python-interpreter-vs.-jupyter-kernel" class="nav-link" data-scroll-target="#python-interpreter-vs.-jupyter-kernel">Python interpreter vs.&nbsp;Jupyter kernel</a></li>
+  </ul></li>
+  <li><a href="#step-1.-create-the-virtual-environment" id="toc-step-1.-create-the-virtual-environment" class="nav-link" data-scroll-target="#step-1.-create-the-virtual-environment">Step 1. Create the virtual environment</a>
+  <ul class="collapse">
+  <li><a href="#macos-and-linux" id="toc-macos-and-linux" class="nav-link" data-scroll-target="#macos-and-linux">macOS and Linux</a></li>
+  <li><a href="#windows" id="toc-windows" class="nav-link" data-scroll-target="#windows">Windows</a></li>
+  </ul></li>
+  <li><a href="#step-2.-activate-the-virtual-environment" id="toc-step-2.-activate-the-virtual-environment" class="nav-link" data-scroll-target="#step-2.-activate-the-virtual-environment">Step 2. Activate the virtual environment</a>
+  <ul class="collapse">
+  <li><a href="#macos-and-linux-1" id="toc-macos-and-linux-1" class="nav-link" data-scroll-target="#macos-and-linux-1">macOS and Linux</a></li>
+  <li><a href="#windows-1" id="toc-windows-1" class="nav-link" data-scroll-target="#windows-1">Windows</a></li>
+  </ul></li>
+  <li><a href="#step-3.-install-packages-inside-.venv" id="toc-step-3.-install-packages-inside-.venv" class="nav-link" data-scroll-target="#step-3.-install-packages-inside-.venv">Step 3. Install packages inside <code>.venv</code></a>
+  <ul class="collapse">
+  <li><a href="#for-notebooks-and-notebook-execution" id="toc-for-notebooks-and-notebook-execution" class="nav-link" data-scroll-target="#for-notebooks-and-notebook-execution">For notebooks and notebook execution</a></li>
+  <li><a href="#for-data-analysis-and-visualization" id="toc-for-data-analysis-and-visualization" class="nav-link" data-scroll-target="#for-data-analysis-and-visualization">For data analysis and visualization</a></li>
+  <li><a href="#why-these-packages" id="toc-why-these-packages" class="nav-link" data-scroll-target="#why-these-packages">Why these packages?</a></li>
+  </ul></li>
+  <li><a href="#step-4.-open-the-project-in-vs-code" id="toc-step-4.-open-the-project-in-vs-code" class="nav-link" data-scroll-target="#step-4.-open-the-project-in-vs-code">Step 4. Open the project in VS Code</a></li>
+  <li><a href="#step-5.-select-the-python-interpreter-in-vs-code" id="toc-step-5.-select-the-python-interpreter-in-vs-code" class="nav-link" data-scroll-target="#step-5.-select-the-python-interpreter-in-vs-code">Step 5. Select the Python interpreter in VS Code</a>
+  <ul class="collapse">
+  <li><a href="#typical-interpreter-path" id="toc-typical-interpreter-path" class="nav-link" data-scroll-target="#typical-interpreter-path">Typical interpreter path</a></li>
+  <li><a href="#in-vs-code" id="toc-in-vs-code" class="nav-link" data-scroll-target="#in-vs-code">In VS Code</a></li>
+  </ul></li>
+  <li><a href="#step-6.-use-notebooks-correctly-in-vs-code" id="toc-step-6.-use-notebooks-correctly-in-vs-code" class="nav-link" data-scroll-target="#step-6.-use-notebooks-correctly-in-vs-code">Step 6. Use notebooks correctly in VS Code</a>
+  <ul class="collapse">
+  <li><a href="#best-case-.venv-is-detected-automatically" id="toc-best-case-.venv-is-detected-automatically" class="nav-link" data-scroll-target="#best-case-.venv-is-detected-automatically">Best case: <code>.venv</code> is detected automatically</a></li>
+  <li><a href="#if-.venv-is-not-available-as-a-kernel" id="toc-if-.venv-is-not-available-as-a-kernel" class="nav-link" data-scroll-target="#if-.venv-is-not-available-as-a-kernel">If <code>.venv</code> is not available as a kernel</a></li>
+  <li><a href="#meaning-of-the-command" id="toc-meaning-of-the-command" class="nav-link" data-scroll-target="#meaning-of-the-command">Meaning of the command</a></li>
+  </ul></li>
+  <li><a href="#step-7.-select-the-jupyter-kernel-in-vs-code" id="toc-step-7.-select-the-jupyter-kernel-in-vs-code" class="nav-link" data-scroll-target="#step-7.-select-the-jupyter-kernel-in-vs-code">Step 7. Select the Jupyter kernel in VS Code</a></li>
+  <li><a href="#step-8.-verify-that-the-notebook-is-using-.venv" id="toc-step-8.-verify-that-the-notebook-is-using-.venv" class="nav-link" data-scroll-target="#step-8.-verify-that-the-notebook-is-using-.venv">Step 8. Verify that the notebook is using <code>.venv</code></a></li>
+  <li><a href="#step-9.-deactivate-the-environment" id="toc-step-9.-deactivate-the-environment" class="nav-link" data-scroll-target="#step-9.-deactivate-the-environment">Step 9. Deactivate the environment</a></li>
+  <li><a href="#common-mistakes" id="toc-common-mistakes" class="nav-link" data-scroll-target="#common-mistakes">Common mistakes</a>
+  <ul class="collapse">
+  <li><a href="#mistake-1.-confusing-interpreter-and-kernel" id="toc-mistake-1.-confusing-interpreter-and-kernel" class="nav-link" data-scroll-target="#mistake-1.-confusing-interpreter-and-kernel">Mistake 1. Confusing interpreter and kernel</a></li>
+  <li><a href="#mistake-2.-installing-packages-outside-.venv" id="toc-mistake-2.-installing-packages-outside-.venv" class="nav-link" data-scroll-target="#mistake-2.-installing-packages-outside-.venv">Mistake 2. Installing packages outside <code>.venv</code></a></li>
+  <li><a href="#mistake-3.-assuming-vs-code-always-detects-.venv" id="toc-mistake-3.-assuming-vs-code-always-detects-.venv" class="nav-link" data-scroll-target="#mistake-3.-assuming-vs-code-always-detects-.venv">Mistake 3. Assuming VS Code always detects <code>.venv</code></a></li>
+  <li><a href="#mistake-4.-clicking-install-for-the-wrong-python" id="toc-mistake-4.-clicking-install-for-the-wrong-python" class="nav-link" data-scroll-target="#mistake-4.-clicking-install-for-the-wrong-python">Mistake 4. Clicking <strong>Install</strong> for the wrong Python</a></li>
+  </ul></li>
+  <li><a href="#recommended-workflow" id="toc-recommended-workflow" class="nav-link" data-scroll-target="#recommended-workflow">Recommended workflow</a></li>
+  <li><a href="#final-note" id="toc-final-note" class="nav-link" data-scroll-target="#final-note">Final note</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Creating and Using a Python <code>.venv</code> in VS Code</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="introduction" class="level2">
+<h2 class="anchored" data-anchor-id="introduction">Introduction</h2>
+<p>A virtual environment helps isolate project dependencies, avoid version conflicts, and improve reproducibility across projects. In this guide, the environment is named <code>.venv</code>, which is a common convention and works well with <a href="https://code.visualstudio.com/">Visual Studio Code</a>.</p>
+<p>This guide also clarifies one of the most common sources of confusion when working with Python in VS Code:</p>
+<ul>
+<li>a <strong>Python interpreter</strong> is used to run regular scripts such as <code>.py</code></li>
+<li>a <strong>Jupyter kernel</strong> is used to run notebook cells in <code>.ipynb</code> files and other notebook-based interfaces</li>
+</ul>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Key idea
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>For scripts, focus on the <strong>Python interpreter</strong>.</p>
+<p>For notebooks, focus on the <strong>Jupyter kernel</strong>.</p>
+<p>In both cases, the safest option is to use the Python installation inside your local <code>.venv</code>.</p>
+</div>
+</div>
+</section>
+<section id="prerequisites" class="level2">
+<h2 class="anchored" data-anchor-id="prerequisites">Prerequisites</h2>
+<p>Before starting, make sure you have installed:</p>
+<ul>
+<li><a href="https://www.python.org/">Python</a></li>
+<li><a href="https://code.visualstudio.com/">Visual Studio Code</a></li>
+<li><a href="https://quarto.org/">Quarto</a> if you also plan to work with <code>.qmd</code> files</li>
+<li>Jupyter support through packages installed inside your environment</li>
+</ul>
+</section>
+<section id="key-concepts" class="level2">
+<h2 class="anchored" data-anchor-id="key-concepts">Key concepts</h2>
+<section id="what-is-.venv" class="level3">
+<h3 class="anchored" data-anchor-id="what-is-.venv">What is <code>.venv</code>?</h3>
+<p>A <code>.venv</code> is a local Python virtual environment stored inside your project folder. It contains its own Python executable and its own installed libraries, which helps keep one project independent from another.</p>
+</section>
+<section id="python-interpreter-vs.-jupyter-kernel" class="level3">
+<h3 class="anchored" data-anchor-id="python-interpreter-vs.-jupyter-kernel">Python interpreter vs.&nbsp;Jupyter kernel</h3>
+<p>These two concepts are related, but they are not the same.</p>
+<section id="python-interpreter" class="level4">
+<h4 class="anchored" data-anchor-id="python-interpreter">Python interpreter</h4>
+<p>The <strong>Python interpreter</strong> is the executable that runs Python code.</p>
+<p>Typical examples:</p>
+<ul>
+<li><code>./.venv/bin/python</code> on macOS/Linux</li>
+<li><code>.venv\Scripts\python.exe</code> on Windows</li>
+</ul>
+<p>When you run a <code>.py</code> file in VS Code, the editor uses a selected <strong>Python interpreter</strong>.</p>
+</section>
+<section id="jupyter-kernel" class="level4">
+<h4 class="anchored" data-anchor-id="jupyter-kernel">Jupyter kernel</h4>
+<p>A <strong>Jupyter kernel</strong> is the execution engine used by notebook-based tools such as:</p>
+<ul>
+<li>Jupyter Notebook</li>
+<li>JupyterLab</li>
+<li>VS Code notebooks (<code>.ipynb</code>)</li>
+<li>Quarto documents with Python code cells</li>
+</ul>
+<p>A Jupyter kernel is usually associated with a specific Python interpreter. In practice, you want the notebook kernel to use the Python interpreter inside your <code>.venv</code>.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Practical rule
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<ul>
+<li>For <code>.py</code> files, select the correct <strong>Python interpreter</strong></li>
+<li>For <code>.ipynb</code> files, select the correct <strong>Jupyter kernel</strong></li>
+<li>Ideally, both should point to the Python installation inside <code>.venv</code></li>
+</ul>
+</div>
+</div>
+</section>
+</section>
+</section>
+<section id="step-1.-create-the-virtual-environment" class="level2">
+<h2 class="anchored" data-anchor-id="step-1.-create-the-virtual-environment">Step 1. Create the virtual environment</h2>
+<p>Create the environment from the root of your project.</p>
+<section id="macos-and-linux" class="level3">
+<h3 class="anchored" data-anchor-id="macos-and-linux">macOS and Linux</h3>
+<div class="sourceCode" id="cb1"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> path/to/your/project</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="windows" class="level3">
+<h3 class="anchored" data-anchor-id="windows">Windows</h3>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> path<span class="dt">\t</span>o<span class="dt">\y</span>our<span class="dt">\p</span>roject</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> venv .venv</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This creates a local virtual environment named <code>.venv</code> inside the project directory.</p>
+</section>
+</section>
+<section id="step-2.-activate-the-virtual-environment" class="level2">
+<h2 class="anchored" data-anchor-id="step-2.-activate-the-virtual-environment">Step 2. Activate the virtual environment</h2>
+<p>After creating the environment, activate it in the terminal.</p>
+<section id="macos-and-linux-1" class="level3">
+<h3 class="anchored" data-anchor-id="macos-and-linux-1">macOS and Linux</h3>
+<div class="sourceCode" id="cb3"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="bu">source</span> .venv/bin/activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="windows-1" class="level3">
+<h3 class="anchored" data-anchor-id="windows-1">Windows</h3>
+<div class="sourceCode" id="cb4"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.venv\Scripts\activate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If PowerShell blocks activation, use:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode powershell code-with-copy"><code class="sourceCode powershell"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="fu">Set-ExecutionPolicy</span> <span class="op">-</span>ExecutionPolicy RemoteSigned <span class="op">-</span>Scope <span class="cf">Process</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="op">.</span><span class="fu">venv</span>\Scripts\activate</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Once activated, the terminal usually shows the environment name, for example:</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="kw">(</span><span class="ex">.venv</span><span class="kw">)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Quick check
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>If you see <code>(.venv)</code> at the beginning of the terminal prompt, the environment is usually active.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-3.-install-packages-inside-.venv" class="level2">
+<h2 class="anchored" data-anchor-id="step-3.-install-packages-inside-.venv">Step 3. Install packages inside <code>.venv</code></h2>
+<p>Once <code>.venv</code> is active, install the packages you need <strong>inside that environment</strong>.</p>
+<section id="for-notebooks-and-notebook-execution" class="level3">
+<h3 class="anchored" data-anchor-id="for-notebooks-and-notebook-execution">For notebooks and notebook execution</h3>
+<div class="sourceCode" id="cb7"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install ipykernel jupyter</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="for-data-analysis-and-visualization" class="level3">
+<h3 class="anchored" data-anchor-id="for-data-analysis-and-visualization">For data analysis and visualization</h3>
+<div class="sourceCode" id="cb8"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="ex">pip</span> install pandas altair vega_datasets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="why-these-packages" class="level3">
+<h3 class="anchored" data-anchor-id="why-these-packages">Why these packages?</h3>
+<ul>
+<li><code>ipykernel</code>: lets Jupyter-based tools execute Python using the current environment</li>
+<li><code>jupyter</code>: provides notebook support</li>
+<li><code>pandas</code>: data manipulation</li>
+<li><code>altair</code>: declarative visualization</li>
+<li><code>vega_datasets</code>: sample datasets for <a href="https://altair-viz.github.io/">Altair</a></li>
+</ul>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Important
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Run these commands <strong>after</strong> activating <code>.venv</code>. Otherwise, packages may be installed in the wrong Python environment.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-4.-open-the-project-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="step-4.-open-the-project-in-vs-code">Step 4. Open the project in VS Code</h2>
+<p>A good practice is to open VS Code from the project root:</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="ex">code</span> .</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This helps VS Code detect the project structure and the local <code>.venv</code>.</p>
+</section>
+<section id="step-5.-select-the-python-interpreter-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="step-5.-select-the-python-interpreter-in-vs-code">Step 5. Select the Python interpreter in VS Code</h2>
+<p>For regular Python scripts such as <code>.py</code>, select the interpreter from the local <code>.venv</code>.</p>
+<section id="typical-interpreter-path" class="level3">
+<h3 class="anchored" data-anchor-id="typical-interpreter-path">Typical interpreter path</h3>
+<ul>
+<li><strong>macOS/Linux</strong>: <code>./.venv/bin/python</code></li>
+<li><strong>Windows</strong>: <code>.venv\Scripts\python.exe</code></li>
+</ul>
+</section>
+<section id="in-vs-code" class="level3">
+<h3 class="anchored" data-anchor-id="in-vs-code">In VS Code</h3>
+<ol type="1">
+<li>Open the Command Palette
+<ul>
+<li><strong>macOS</strong>: <code>Cmd + Shift + P</code></li>
+<li><strong>Windows/Linux</strong>: <code>Ctrl + Shift + P</code></li>
+</ul></li>
+<li>Run <code>Python: Select Interpreter</code></li>
+<li>Choose the interpreter from <code>.venv</code></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/select-interpreter.png" class="img-fluid figure-img" style="width:80.0%" alt="VS Code interpreter selection"></p>
+<figcaption>Selecting the Python interpreter in VS Code</figcaption>
+</figure>
+</div>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Remember
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Selecting the interpreter is especially relevant for <code>.py</code> files. It does not automatically guarantee that a notebook will use the same environment.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-6.-use-notebooks-correctly-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="step-6.-use-notebooks-correctly-in-vs-code">Step 6. Use notebooks correctly in VS Code</h2>
+<p>When working with notebooks (<code>.ipynb</code>), VS Code uses a <strong>Jupyter kernel</strong>, not just the interpreter selector.</p>
+<section id="best-case-.venv-is-detected-automatically" class="level3">
+<h3 class="anchored" data-anchor-id="best-case-.venv-is-detected-automatically">Best case: <code>.venv</code> is detected automatically</h3>
+<p>Sometimes VS Code detects the environment automatically and lets you use it directly as a notebook kernel.</p>
+<p>If that happens:</p>
+<ol type="1">
+<li>Open the notebook</li>
+<li>Click <strong>Select Kernel</strong></li>
+<li>Choose the option associated with <code>.venv</code></li>
+</ol>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="../images/select-kernel.png" class="img-fluid figure-img" style="width:80.0%" alt="VS Code kernel selection"></p>
+<figcaption>Selecting the Jupyter kernel in VS Code</figcaption>
+</figure>
+</div>
+</section>
+<section id="if-.venv-is-not-available-as-a-kernel" class="level3">
+<h3 class="anchored" data-anchor-id="if-.venv-is-not-available-as-a-kernel">If <code>.venv</code> is not available as a kernel</h3>
+<p>Register the environment manually as a Jupyter kernel:</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="ex">python</span> <span class="at">-m</span> ipykernel install <span class="at">--user</span> <span class="at">--name</span><span class="op">=</span>project-viz-env <span class="at">--display-name</span><span class="op">=</span><span class="st">"Python viz (.venv)"</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</section>
+<section id="meaning-of-the-command" class="level3">
+<h3 class="anchored" data-anchor-id="meaning-of-the-command">Meaning of the command</h3>
+<ul>
+<li><code>python</code>: uses the currently active interpreter, ideally the one inside <code>.venv</code></li>
+<li><code>-m ipykernel install</code>: registers a Jupyter kernel</li>
+<li><code>--user</code>: installs it only for the current user</li>
+<li><code>--name</code>: internal kernel name</li>
+<li><code>--display-name</code>: visible label in VS Code or JupyterLab</li>
+</ul>
+<p>After this, the kernel should appear in notebook interfaces.</p>
+<div class="callout callout-style-default callout-tip callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Tip
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Manual kernel registration is useful when VS Code does not detect <code>.venv</code> automatically. In many cases, automatic detection works and manual registration is not necessary.</p>
+</div>
+</div>
+</section>
+</section>
+<section id="step-7.-select-the-jupyter-kernel-in-vs-code" class="level2">
+<h2 class="anchored" data-anchor-id="step-7.-select-the-jupyter-kernel-in-vs-code">Step 7. Select the Jupyter kernel in VS Code</h2>
+<p>For a notebook:</p>
+<ol type="1">
+<li>Open the <code>.ipynb</code> file</li>
+<li>Click <strong>Select Kernel</strong></li>
+<li>Choose the kernel associated with your <code>.venv</code></li>
+</ol>
+<p>If you registered it manually, it may appear with a display name such as:</p>
+<p><code>Python viz (.venv)</code></p>
+<p>Then the notebook will execute cells using the project environment.</p>
+</section>
+<section id="step-8.-verify-that-the-notebook-is-using-.venv" class="level2">
+<h2 class="anchored" data-anchor-id="step-8.-verify-that-the-notebook-is-using-.venv">Step 8. Verify that the notebook is using <code>.venv</code></h2>
+<p>Inside a notebook cell, run:</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(sys.executable)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>You want to see a path pointing to your local <code>.venv</code>, such as:</p>
+<div class="sourceCode" id="cb12"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="ex">.../your-project/.venv/bin/python</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>If it points to a global Python instead, then the notebook is using the wrong kernel.</p>
+<div class="callout callout-style-default callout-important callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Why this matters
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A notebook may open correctly and still use the wrong environment. Checking <code>sys.executable</code> is a simple way to confirm that the notebook is really running from <code>.venv</code>.</p>
+</div>
+</div>
+</section>
+<section id="step-9.-deactivate-the-environment" class="level2">
+<h2 class="anchored" data-anchor-id="step-9.-deactivate-the-environment">Step 9. Deactivate the environment</h2>
+<p>When you finish working in the terminal, deactivate the environment with:</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="ex">deactivate</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>This exits the virtual environment and returns to the default shell Python.</p>
+</section>
+<section id="common-mistakes" class="level2">
+<h2 class="anchored" data-anchor-id="common-mistakes">Common mistakes</h2>
+<section id="mistake-1.-confusing-interpreter-and-kernel" class="level3">
+<h3 class="anchored" data-anchor-id="mistake-1.-confusing-interpreter-and-kernel">Mistake 1. Confusing interpreter and kernel</h3>
+<p>A Python interpreter and a Jupyter kernel are related, but not identical.</p>
+<ul>
+<li>Scripts use an interpreter</li>
+<li>Notebooks use a kernel</li>
+<li>The kernel should ideally use the interpreter from <code>.venv</code></li>
+</ul>
+</section>
+<section id="mistake-2.-installing-packages-outside-.venv" class="level3">
+<h3 class="anchored" data-anchor-id="mistake-2.-installing-packages-outside-.venv">Mistake 2. Installing packages outside <code>.venv</code></h3>
+<p>Always activate <code>.venv</code> before running <code>pip install ...</code>.</p>
+</section>
+<section id="mistake-3.-assuming-vs-code-always-detects-.venv" class="level3">
+<h3 class="anchored" data-anchor-id="mistake-3.-assuming-vs-code-always-detects-.venv">Mistake 3. Assuming VS Code always detects <code>.venv</code></h3>
+<p>Often it does, but not always. Manual kernel registration is optional, not mandatory.</p>
+</section>
+<section id="mistake-4.-clicking-install-for-the-wrong-python" class="level3">
+<h3 class="anchored" data-anchor-id="mistake-4.-clicking-install-for-the-wrong-python">Mistake 4. Clicking <strong>Install</strong> for the wrong Python</h3>
+<p>If VS Code says something like “Running cells with Python X requires <code>ipykernel</code>”, first check whether that Python is really your <code>.venv</code>.</p>
+</section>
+</section>
+<section id="recommended-workflow" class="level2">
+<h2 class="anchored" data-anchor-id="recommended-workflow">Recommended workflow</h2>
+<ol type="1">
+<li>Create <code>.venv</code></li>
+<li>Activate <code>.venv</code></li>
+<li>Install required packages</li>
+<li>Open the project in VS Code</li>
+<li>Select the interpreter for <code>.py</code> files</li>
+<li>Select the Jupyter kernel for <code>.ipynb</code> files</li>
+<li>Register the kernel only if automatic detection fails</li>
+</ol>
+</section>
+<section id="final-note" class="level2">
+<h2 class="anchored" data-anchor-id="final-note">Final note</h2>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Good practice
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Use <code>.venv</code> as the default environment for each project. This keeps dependencies isolated and makes both scripts and notebooks more reproducible.</p>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+
+
+
+
+<script src="../site_libs/quarto-html/zenscroll-min.js"></script>
+</body></html>

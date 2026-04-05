@@ -1,0 +1,438 @@
+---
+title: "Creating a Quarto Project with `_quarto.yml` and Output to `docs/`"
+format:
+  html:
+    toc: true
+    theme: cosmo
+    smooth-scroll: true
+    code-fold: false
+    code-tools: false
+---
+
+## Introduction
+
+A Quarto project helps you organize multiple documents, share configuration across files, and control where rendered outputs are written. One of the most practical setups is to define a project with `_quarto.yml` and send rendered output to a `docs/` folder.
+
+This structure is especially useful when you want to keep source files clean while also preparing the project for publication with GitHub Pages.
+
+::: {.callout-note}
+## Why use a Quarto project?
+
+A Quarto project lets you:
+
+- manage multiple `.qmd` files in one directory
+- share configuration through `_quarto.yml`
+- render the whole project with one command
+- redirect generated output to a separate folder such as `docs/`
+:::
+
+## Prerequisites
+
+Before starting, make sure you have installed:
+
+- [Quarto](https://quarto.org/)
+- [Visual Studio Code](https://code.visualstudio.com/) if you want to edit and preview from an IDE
+- [Git](https://git-scm.com/) if you plan to publish the project on GitHub
+- a GitHub account if you want to deploy with GitHub Pages
+
+## What is `_quarto.yml`?
+
+The file `_quarto.yml` is the main project configuration file in Quarto. It is used to define project-level settings such as:
+
+- the project type
+- the output directory
+- website configuration
+- shared format options
+- preview behavior
+
+In practice, `_quarto.yml` is the file that turns a normal folder into a Quarto project.
+
+::: {.callout-important}
+## Key idea
+
+If you want a folder to behave as a Quarto project, `_quarto.yml` is the central file that controls that behavior.
+:::
+
+## Why send output to `docs/`?
+
+By default, Quarto website output is often written to `_site/`, but using `docs/` can be more convenient when you want a repository layout that is easy to inspect and publish.
+
+Sending output to `docs/` helps you:
+
+- keep generated files separate from source files
+- avoid clutter in the project root
+- make GitHub Pages configuration simpler
+- keep the repository structure easier to understand
+
+::: {.callout-tip}
+## Common use case
+
+If your repository will be published with GitHub Pages, `docs/` is one of the simplest output directories to use.
+:::
+
+## Recommended project structure
+
+A clean project structure could look like this:
+
+```text
+my-quarto-project/
+├── _quarto.yml
+├── index.qmd
+├── about.qmd
+├── styles.css
+├── images/
+│   └── ...
+└── docs/
+```
+
+### What each file or folder does
+
+- `_quarto.yml`: project configuration
+- `index.qmd`: home page or main entry point
+- `about.qmd`: additional content page
+- `styles.css`: optional custom styles
+- `images/`: figures and screenshots
+- `docs/`: rendered HTML output
+
+## Step 1. Create the project folder
+
+Create a new folder for the project and move into it:
+
+```bash
+mkdir my-quarto-project
+cd my-quarto-project
+```
+
+You can use any project name you want. The important part is to keep all Quarto source files inside this folder.
+
+## Step 2. Create the main files
+
+Create the minimum files needed for the project:
+
+```bash
+touch _quarto.yml
+touch index.qmd
+mkdir docs
+```
+
+If you want an extra page:
+
+```bash
+touch about.qmd
+```
+
+::: {.callout-warning}
+## Note
+
+You do not always need to create `docs/` manually. Quarto can create the output directory during render, but creating it explicitly helps make the project structure clear from the beginning.
+:::
+
+## Step 3. Create `_quarto.yml`
+
+Here is a minimal and clean configuration for a website project that renders output to `docs/`:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "My Quarto Project"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+```
+
+### Explanation
+
+#### `project`
+
+This section defines the project itself.
+
+- `type: website` tells Quarto that this is a website project
+- `output-dir: docs` tells Quarto to place rendered output in `docs/`
+
+#### `website`
+
+This section defines website-specific settings.
+
+- `title` sets the website title
+- `navbar` creates top navigation links
+
+#### `format`
+
+This section defines shared output settings.
+
+- `html` means the project will render to HTML
+- `theme: cosmo` applies a built-in visual theme
+- `toc: true` enables a table of contents
+
+## Step 4. Create `index.qmd`
+
+A minimal `index.qmd` file could look like this:
+
+```markdown
+---
+title: "Home"
+---
+
+# Welcome
+
+This is the home page of my Quarto project.
+
+## Next steps
+
+- Add more pages
+- Customize the theme
+- Publish the project
+```
+
+If you created an `about.qmd` page, you can use:
+
+```markdown
+---
+title: "About"
+---
+
+# About this project
+
+This page contains additional information about the site.
+```
+
+## Step 5. Preview the project
+
+From the project root, run:
+
+```bash
+quarto preview
+```
+
+Quarto will detect `_quarto.yml`, treat the folder as a project, render the site, and start a local preview server.
+
+### What happens during preview?
+
+- Quarto renders project files to `docs/`
+- a local server is started
+- the project can be viewed in a browser
+- changes are re-rendered while preview is active
+
+::: {.callout-note}
+## Good to know
+
+If your project uses `output-dir: docs`, the rendered files remain in `docs/` after preview or render. They are not temporary files that disappear when preview stops.
+:::
+
+## Step 6. Render the full project
+
+To render the full project without launching preview, run:
+
+```bash
+quarto render
+```
+
+This is useful when you want to generate the final site output in `docs/` without opening the local preview server.
+
+## Step 7. Understand what goes into `docs/`
+
+After rendering, the `docs/` directory will contain generated output such as:
+
+- `index.html`
+- `about.html`
+- supporting assets
+- other files needed by the website
+
+A possible rendered structure could look like this:
+
+```text
+docs/
+├── index.html
+├── about.html
+├── site_libs/
+└── search.json
+```
+
+The exact contents may vary depending on the project configuration and features enabled.
+
+## Step 8. Keep source and output separate
+
+One of the main benefits of `output-dir: docs` is that source files remain in the project root while rendered output is grouped in one place.
+
+### Source files stay here
+
+- `_quarto.yml`
+- `index.qmd`
+- `about.qmd`
+- `styles.css`
+- `images/`
+
+### Generated output goes here
+
+- `docs/index.html`
+- `docs/about.html`
+- other generated assets
+
+This makes it easier to distinguish between files you edit and files Quarto generates.
+
+## Step 9. Publish with GitHub Pages
+
+If your repository is hosted on GitHub, this structure works well with GitHub Pages.
+
+### Typical workflow
+
+1. Push the repository to GitHub
+2. Open the repository settings
+3. Go to **Pages**
+4. Under **Source**, choose the branch
+5. Select the `docs/` folder
+6. Save the configuration
+
+After that, GitHub Pages can publish the site from the rendered content in `docs/`.
+
+::: {.callout-tip}
+## Practical recommendation
+
+A common workflow is:
+
+1. edit `.qmd` source files
+2. run `quarto render`
+3. commit both source files and the rendered `docs/` output
+4. push to GitHub
+:::
+
+## Optional improvements
+
+### Add a custom stylesheet
+
+You can add a file such as `styles.css` and reference it in `_quarto.yml`:
+
+```yaml
+format:
+  html:
+    theme: cosmo
+    toc: true
+    css: styles.css
+```
+
+### Add preview options
+
+You can also control preview behavior in `_quarto.yml`:
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+  preview:
+    browser: true
+```
+
+This is useful if you want project-specific preview settings.
+
+### Add a site URL
+
+If the project will be published, you can define the website URL:
+
+```yaml
+website:
+  title: "My Quarto Project"
+  site-url: "https://your-username.github.io/your-repository/"
+```
+
+## Common mistakes
+
+### Mistake 1. Forgetting `_quarto.yml`
+
+Without `_quarto.yml`, Quarto may treat files as individual documents instead of as a project.
+
+### Mistake 2. Mixing source files with rendered output
+
+If output is written to the project root, the directory can become harder to manage. Using `docs/` keeps things more organized.
+
+### Mistake 3. Editing files inside `docs/`
+
+The `docs/` folder contains generated output. In most cases, you should edit the source `.qmd` files instead, then render again.
+
+### Mistake 4. Forgetting to render before publishing
+
+If GitHub Pages is configured to publish from `docs/`, make sure the project has been rendered so that the latest HTML files are actually there.
+
+### Mistake 5. Using broken navigation links
+
+If a page is listed in the navbar, make sure the corresponding `.qmd` file exists.
+
+## Recommended workflow
+
+A clean workflow for this kind of project is:
+
+1. create the project folder
+2. create `_quarto.yml`
+3. define `output-dir: docs`
+4. create `index.qmd` and other pages
+5. preview locally with `quarto preview`
+6. render the full site with `quarto render`
+7. publish `docs/` through GitHub Pages if needed
+
+## Complete minimal example
+
+### `_quarto.yml`
+
+```yaml
+project:
+  type: website
+  output-dir: docs
+
+website:
+  title: "My Quarto Project"
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+      - href: about.qmd
+        text: About
+
+format:
+  html:
+    theme: cosmo
+    toc: true
+```
+
+### `index.qmd`
+
+```markdown
+---
+title: "Home"
+---
+
+# Welcome
+
+This is the home page of my Quarto project.
+```
+
+### `about.qmd`
+
+```markdown
+---
+title: "About"
+---
+
+# About
+
+This page contains extra information.
+```
+
+## Final note
+
+Using `_quarto.yml` together with `output-dir: docs` is a simple and effective way to keep a Quarto project organized. It separates source files from generated output, supports clean project structure, and works especially well when the final site will be published with GitHub Pages.
+
+::: {.callout-important}
+## Final recommendation
+
+If your goal is to keep the project clean and make publishing easier, `docs/` is usually a very practical output directory for Quarto website projects.
+:::
