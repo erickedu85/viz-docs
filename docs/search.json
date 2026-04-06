@@ -326,14 +326,35 @@
     "href": "index.html",
     "title": "Home",
     "section": "",
-    "text": "abc\n\n\n\na\nb\nc"
+    "text": "This site collects practical notes and reusable guides for teaching and working with data visualization workflows.\nThe pages are organized as short, independent references that can be used separately depending on the task, tool, or course context.\n\n\n\n\nThis section includes practical setup notes for working with Python environments in VS Code.\nCurrent page:\n\nPython .venv\n\n\n\n\nThis section focuses on Git, Quarto, and publishing workflows.\nCurrent pages:\n\nInstall Quarto\nQuarto Project\nGit Basics\nGitHub Pages\n\n\n\n\n\nYou can navigate through the sections using the top menu.\nEach page is intended to be:\n\nshort and practical\nfocused on one workflow or setup task\neasy to reuse in teaching and project work\n\n\n\n\nIf you are new to this documentation, a good order is:\n\nPython .venv\nInstall Quarto\nQuarto Project\nGit Basics\nGitHub Pages\n\n\n\n\nThis is a living documentation space. New sections and guides may be added over time as new teaching, setup, and publishing workflows are incorporated."
   },
   {
-    "objectID": "index.html#next-steps",
-    "href": "index.html#next-steps",
+    "objectID": "index.html#available-sections",
+    "href": "index.html#available-sections",
     "title": "Home",
     "section": "",
-    "text": "a\nb\nc"
+    "text": "This section includes practical setup notes for working with Python environments in VS Code.\nCurrent page:\n\nPython .venv\n\n\n\n\nThis section focuses on Git, Quarto, and publishing workflows.\nCurrent pages:\n\nInstall Quarto\nQuarto Project\nGit Basics\nGitHub Pages"
+  },
+  {
+    "objectID": "index.html#how-to-use-this-site",
+    "href": "index.html#how-to-use-this-site",
+    "title": "Home",
+    "section": "",
+    "text": "You can navigate through the sections using the top menu.\nEach page is intended to be:\n\nshort and practical\nfocused on one workflow or setup task\neasy to reuse in teaching and project work"
+  },
+  {
+    "objectID": "index.html#recommended-starting-points",
+    "href": "index.html#recommended-starting-points",
+    "title": "Home",
+    "section": "",
+    "text": "If you are new to this documentation, a good order is:\n\nPython .venv\nInstall Quarto\nQuarto Project\nGit Basics\nGitHub Pages"
+  },
+  {
+    "objectID": "index.html#notes",
+    "href": "index.html#notes",
+    "title": "Home",
+    "section": "",
+    "text": "This is a living documentation space. New sections and guides may be added over time as new teaching, setup, and publishing workflows are incorporated."
   },
   {
     "objectID": "git-github/github-pages.html",

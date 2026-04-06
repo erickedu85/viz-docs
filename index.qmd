@@ -4,10 +4,51 @@ title: "Home"
 
 # Welcome
 
-abc
+This site collects practical notes and reusable guides for teaching and working with data visualization workflows.
 
-## Next steps
+The pages are organized as short, independent references that can be used separately depending on the task, tool, or course context.
 
-- a
-- b
-- c
+## Available sections
+
+### Environment
+
+This section includes practical setup notes for working with Python environments in VS Code.
+
+Current page:
+
+- [Python `.venv`](environment/venv-vscode.qmd)
+
+### Git and Publishing
+
+This section focuses on Git, Quarto, and publishing workflows.
+
+Current pages:
+
+- [Install Quarto](git-github/quarto-install.qmd)
+- [Quarto Project](git-github/quarto-project.qmd)
+- [Git Basics](git-github/git-intro.qmd)
+- [GitHub Pages](git-github/github-pages.qmd)
+
+## How to use this site
+
+You can navigate through the sections using the top menu.
+
+Each page is intended to be:
+
+- short and practical
+- focused on one workflow or setup task
+- easy to reuse in teaching and project work
+
+## Recommended starting points
+
+If you are new to this documentation, a good order is:
+
+1. [Python `.venv`](environment/venv-vscode.qmd)
+2. [Install Quarto](git-github/quarto-install.qmd)
+3. [Quarto Project](git-github/quarto-project.qmd)
+4. [Git Basics](git-github/git-intro.qmd)
+5. [GitHub Pages](git-github/github-pages.qmd)
+
+## Notes
+
+This is a living documentation space. New sections and guides may be added over time as new teaching, setup, and publishing workflows are incorporated.
